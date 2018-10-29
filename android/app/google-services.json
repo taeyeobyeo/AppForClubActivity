@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "284749200017",
+    "firebase_url": "https://project-sle.firebaseio.com",
+    "project_id": "project-sle",
+    "storage_bucket": "project-sle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284749200017:android:9bd193fceaf59bdc",
+        "android_client_info": {
+          "package_name": "com.sle.projectsle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284749200017-s1u3m0f932tvk6s8lks8nn0fdlt68c7h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVQZDCxecPkJrYIdTFFc2ecsIHx3kJFzI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
