@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'route/home.dart';
+import 'route/intro.dart';
 
 void main() => runApp(RouteApp());
 
@@ -9,17 +14,20 @@ class RouteApp extends StatefulWidget {
 }
 
 class RouteState extends State<RouteApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Main',
-      home: HomePage(),
-      initialRoute: '/home',
+      home: LoginPage(),
+      theme: ThemeData(
+        primaryColor: Colors.white,
+        accentColor: Colors.transparent,
+      ),
+      initialRoute: '/login',
       routes:{
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
-        // '/search': (context) => SearchPage(),
+        '/intro': (context) => IntroPage(),
         // '/favorite':(context) => FavoritePage(),
         // '/ranking':(context) => RankingPage(),
         // '/mypage':(context) => MyPage(),
@@ -29,16 +37,39 @@ class RouteState extends State<RouteApp> {
   }
 }
 
-class HomePage extends StatelessWidget{
+class LoginPage extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() => new LoginState();
+}
+
+class LoginState extends State<LoginPage>{
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = new GoogleSignIn();
+
+  Future<FirebaseUser> _signIn() async {
+    GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+    FirebaseUser user = await _auth.signInWithGoogle(
+      idToken: googleSignInAuthentication.idToken,
+      accessToken: googleSignInAuthentication.accessToken
+    );
+    print("User Name : ${user.displayName}");
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
       body: new Stack(
         children: <Widget>[
-          new Container(
-            decoration: new BoxDecoration(
-              image: new DecorationImage(image: new AssetImage("assets/images/7.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+         Hero(
+            tag:'image7',
+            child: Container(
+              decoration: new BoxDecoration(
+                image: new DecorationImage(image: new AssetImage("assets/images/7.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+              ),
             ),
           ),
           Center(
@@ -52,7 +83,9 @@ class HomePage extends StatelessWidget{
                       fontSize: 80.0,
                     ),
                   ),
-                  onPressed: ()=>{},
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/intro');
+                  },
                 ),
                 SizedBox(height:250.0),
                 FlatButton(
@@ -61,7 +94,14 @@ class HomePage extends StatelessWidget{
                       fontSize: 20.0,
                     ),
                   ),
-                  onPressed: ()=>{},
+                  onPressed: (){
+                    _signIn()
+                      .then((FirebaseUser user)=>print(user)
+                      )
+                      .catchError((e)=>print(e));
+                    Navigator.pushNamed(context, '/home');
+                  }
+                  ,
                 ),
               ],
             ),
