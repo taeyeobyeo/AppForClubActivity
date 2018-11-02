@@ -45,7 +45,6 @@ class IntroState extends State<IntroPage> {
                 await Firestore.instance.collection('club').document('슬기짜기').updateData({
                   "description": _classofController.text,
                 });
-                cu.currentUser.setClass(_classofController.text);
                 Navigator.of(context).pop();
               },
             ),

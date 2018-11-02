@@ -15,6 +15,7 @@ import 'package:project_sle/route/configure/configure.dart';
 import 'package:project_sle/route/configure/secretConfigure.dart';
 import 'package:project_sle/route/configure/personalSetting.dart';
 import 'package:project_sle/route/configure/mobileSpecification.dart';
+import 'package:project_sle/route/database/add.dart';
 
 void main() => runApp(RouteApp());
 
@@ -46,6 +47,7 @@ class RouteState extends State<RouteApp> {
         '/secret':(context) => SecretPage(),
         '/personal': (context) => PersonalPage(),
         '/mobile': (context)=> MobileSpecificationPage(),
+        '/addData': (context) => AddDataPage(),
       },
     );
   }

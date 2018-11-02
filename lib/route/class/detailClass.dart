@@ -16,13 +16,15 @@ class DetailClassPage extends StatefulWidget {
 class DetailClassState extends State<DetailClassPage>{
   TextEditingController _classofController = TextEditingController();
   final Map<String,dynamic> data;
-
+  List<dynamic> proffessors;
   DetailClassState({Key key, @required this.data})
     : assert(data != null);
 
   @override
   initState(){
     _classofController.text = data["body"];
+    proffessors = data["head"]["교수님"].toList();
+    // print(proffessors);
     super.initState();
   }
 
@@ -120,12 +122,10 @@ class DetailClassState extends State<DetailClassPage>{
                 ListView(
                   padding: EdgeInsets.all(20.0),
                   children: <Widget>[
-                    // ListTile(
-                    //   trailing: Text("작성자: "+ data['head']["author"]),
-                    // ),
-                    // ListTile(
-                    //   trailing: Text("학번: " + data['head']["authorInfo"]),
-                    // ),
+                    ListTile(
+                      leading: Text("교수님:"),
+                      title: Text(proffessors.toString()),
+                    ),
                     Text(
                       _classofController.text,
                       softWrap: true,
@@ -135,7 +135,6 @@ class DetailClassState extends State<DetailClassPage>{
               ],)
             ),
           ),
-          
         ],
       )
     );

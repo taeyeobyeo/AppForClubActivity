@@ -81,6 +81,18 @@ class DetailDataState extends State<DetailDataPage>{
     else return null;
   }
 
+  IconButton _delete(){
+    if(cu.currentUser.getLevel() == "admin")
+      return IconButton(
+        icon: Icon(Icons.delete),
+        onPressed: (){
+          Firestore.instance.collection('club').document('슬기짜기').collection('database').document(data["head"]["title"]).delete();
+          Navigator.pop(context);
+        },
+      );
+    else return null;
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -105,6 +117,9 @@ class DetailDataState extends State<DetailDataPage>{
                   backgroundColor: Colors.white70,
                   floating: true,
                   snap: true,
+                  actions: <Widget>[
+                    _delete(),
+                  ],
                 ),
               ];
             },
@@ -123,9 +138,6 @@ class DetailDataState extends State<DetailDataPage>{
                     ListTile(
                       trailing: Text("작성자: "+ data['head']["author"]),
                     ),
-                    ListTile(
-                      trailing: Text("학번: " + data['head']["authorInfo"]),
-                    ),
                     Text(
                       _classofController.text,
                       softWrap: true,
@@ -135,7 +147,6 @@ class DetailDataState extends State<DetailDataPage>{
               ],)
             ),
           ),
-          
         ],
       )
     );

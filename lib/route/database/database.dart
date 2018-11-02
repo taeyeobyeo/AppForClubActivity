@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'detailData.dart';
+import 'package:project_sle/global/currentUser.dart' as cu;
 
 class DatabasePage extends StatefulWidget{
   @override
@@ -86,7 +87,18 @@ class DatabaseState extends State<DatabasePage>{
         ),
       ),
     );
-    
+  }
+
+  FloatingActionButton _fix(){
+    if(cu.currentUser.getLevel() == "admin")
+      return FloatingActionButton(
+        backgroundColor: Colors.white70,
+        child: Icon(Icons.subject, color: Theme.of(context).accentColor,),
+        onPressed: (){
+          Navigator.pushNamed(context, '/addData');
+        },
+      );
+    else return null;
   }
 
   @override
@@ -110,9 +122,7 @@ class DatabaseState extends State<DatabasePage>{
       .toList();
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("helllo"),
-      // ),
+      floatingActionButton: _fix(),
       body: Stack(
           children: <Widget>[
           Hero(
