@@ -9,9 +9,10 @@ class ConfigurePage extends StatefulWidget{
 class ConfigureState extends State<ConfigurePage> {
   bool alarmON = true;
   bool lowQuality = false;
+  
   /*Only a widget is allowed
    *Multiple widgets will create error */
-  Container _whiteEdgeBox ( String title, Widget widget){
+  Container _whiteEdgeBox( String title, Widget widget){
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       padding: EdgeInsets.all(20.0),
@@ -45,15 +46,12 @@ class ConfigureState extends State<ConfigurePage> {
     return Scaffold(
       body: Stack(
           children: <Widget>[
-          Hero(
-            tag:'image3',
-            child: Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage("assets/images/37.jpg"), 
-                  colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), 
-                  fit: BoxFit.cover,
-                ),
+          Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage("assets/images/37.jpg"), 
+                colorFilter: ColorFilter.mode(Colors.grey, BlendMode.overlay), 
+                fit: BoxFit.cover,
               ),
             ),
           ),

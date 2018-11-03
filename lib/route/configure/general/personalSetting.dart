@@ -43,7 +43,7 @@ class PersonalState extends State<PersonalPage>{
             RaisedButton(
               child: Text('수정'),
               onPressed: () async{
-                await Firestore.instance.collection('users').document(cu.currentUser.getUid().toString()).updateData({
+                await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
                   "classof": _classofController.text,
                 });
                 cu.currentUser.setClass(_classofController.text);
@@ -88,7 +88,7 @@ class PersonalState extends State<PersonalPage>{
             RaisedButton(
               child: Text('수정'),
               onPressed: () async{
-                await Firestore.instance.collection('users').document(cu.currentUser.getUid().toString()).updateData({
+                await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
                   "phoneNumber": _classofController.text,
                 });
                 cu.currentUser.setPhoneNumber(_classofController.text);
@@ -132,7 +132,7 @@ class PersonalState extends State<PersonalPage>{
             tag:'image37',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/37.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/37.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.overlay), fit: BoxFit.cover,),
               ),
             ),
           ),

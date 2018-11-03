@@ -41,7 +41,7 @@ class HomeState extends State<HomePage>{
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: new AssetImage("assets/images/$pic.jpg"),
-                  colorFilter: ColorFilter.mode(Colors.black38, BlendMode.colorBurn),
+                  colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -203,9 +203,9 @@ class HomeState extends State<HomePage>{
                 childAspectRatio: 2.4,
                 children: <Widget>[
                   imageButton("동아리 소개", 16, context,'/intro'),
-                  imageButton("동아리 자료", 21, context,'/database'),
+                  imageButton("동아리 자료", 2, context,'/database'),
                   imageButton("자유 계시판", 18, context,''),
-                  imageButton("수업지원", 24, context,'/class'),
+                  imageButton("수업지원", 15, context,'/class'),
                   imageButton("연락처", 11, context,'/contact'),
                 ],
               );

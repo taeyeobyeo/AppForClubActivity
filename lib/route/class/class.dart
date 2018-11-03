@@ -15,7 +15,6 @@ class ClassState extends State<ClassPage>{
           _selection = s;
         });
   }
-  
   final List<String> _type = ['C프로그래밍', 'Java', 'OODP', 'C++',''].toList();
   String _selection2;
   void select2(String s){
@@ -49,8 +48,6 @@ class ClassState extends State<ClassPage>{
       ),
     );
   }
-
-
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     Map<String, dynamic> map = data.data;
@@ -95,7 +92,17 @@ class ClassState extends State<ClassPage>{
         ),
       ),
     );
-    
+  }
+
+
+  FloatingActionButton _fix(){
+    return FloatingActionButton(
+      backgroundColor: Colors.white70,
+      child: Icon(Icons.add, color: Theme.of(context).accentColor,),
+      onPressed: (){
+        Navigator.pushNamed(context, '/addClass');
+      },
+    );
   }
 
   @override
@@ -112,13 +119,14 @@ class ClassState extends State<ClassPage>{
       .toList();
 
     return Scaffold(
+      floatingActionButton: _fix(),
       body: Stack(
           children: <Widget>[
           Hero(
-            tag:'image24',
+            tag:'image15',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/24.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
               ),
             ),
           ),
@@ -126,7 +134,7 @@ class ClassState extends State<ClassPage>{
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  title: Text("동아리 자료",
+                  title: Text("수업지원",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   )),

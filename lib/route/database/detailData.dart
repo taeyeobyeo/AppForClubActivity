@@ -102,7 +102,7 @@ class DetailDataState extends State<DetailDataPage>{
         children: <Widget>[
           Container(
             decoration: new BoxDecoration(
-              image: new DecorationImage(image: new AssetImage("assets/images/21.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+              image: new DecorationImage(image: new AssetImage("assets/images/2.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
             ),
           ),
           NestedScrollView(

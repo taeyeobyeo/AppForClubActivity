@@ -88,10 +88,10 @@ class AddDataState extends State<AddDataPage>{
       body: Stack(
           children: <Widget>[
           Hero(
-            tag:'image21',
+            tag:'image2',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/21.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/2.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
               ),
             ),
           ),

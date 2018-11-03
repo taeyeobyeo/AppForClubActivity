@@ -13,9 +13,11 @@ import 'package:project_sle/route/contact/contact.dart';
 import 'package:project_sle/fail.dart';
 import 'package:project_sle/route/configure/configure.dart';
 import 'package:project_sle/route/configure/secretConfigure.dart';
-import 'package:project_sle/route/configure/personalSetting.dart';
-import 'package:project_sle/route/configure/mobileSpecification.dart';
-import 'package:project_sle/route/database/add.dart';
+import 'package:project_sle/route/configure/general/personalSetting.dart';
+import 'package:project_sle/route/configure/general/mobileSpecification.dart';
+import 'package:project_sle/route/database/addData.dart';
+import 'package:project_sle/route/class/addClass.dart';
+import 'package:project_sle/route/configure/member/addUser.dart';
 
 void main() => runApp(RouteApp());
 
@@ -48,6 +50,8 @@ class RouteState extends State<RouteApp> {
         '/personal': (context) => PersonalPage(),
         '/mobile': (context)=> MobileSpecificationPage(),
         '/addData': (context) => AddDataPage(),
+        '/addClass': (context) => AddClassPage(),
+        '/addUser' : (context) => AddUserPage(),
       },
     );
   }
@@ -74,36 +78,28 @@ class LoginState extends State<LoginPage>{
   void _updateUserData(FirebaseUser user)async {
     DateTime now = DateTime.now();
     setCurrentUser(user, now);
-    await Firestore.instance.collection('users').document(user.uid).get().then((doc){
+    await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(user.uid).get().then((doc){
       if(doc.exists){
-        String hi = doc.data["level"];
-        // print(hi);
-        if(hi =="guest"){
-          Navigator.pushNamed(context, '/failed');
-        }
-        else{
-          Firestore.instance.runTransaction((Transaction transaction)async{
-            CollectionReference reference = Firestore.instance.collection('users');
-            await reference.document('${user.uid}').updateData({
-              "uid": user.uid,
-              "displayName": user.displayName,
-              "photoUrl": user.photoUrl,
-              "email": user.email,
-              "finalLogin": now
-            });
+        Firestore.instance.runTransaction((Transaction transaction)async{
+          CollectionReference reference = Firestore.instance.collection('club').document('슬기짜기').collection('users');
+          await reference.document('${user.uid}').updateData({
+            "uid": user.uid,
+            "displayName": user.displayName,
+            "photoUrl": user.photoUrl,
+            "email": user.email,
+            "finalLogin": now
           });
-          Navigator.pushNamed(context, '/home');
-        }
+        });
+        Navigator.pushNamed(context, '/home');
       }
       else{
         Firestore.instance.runTransaction((Transaction transaction)async{
-        CollectionReference reference = Firestore.instance.collection('users');
+        CollectionReference reference = Firestore.instance.collection('club').document('슬기짜기').collection('guest');
           await reference.document('${user.uid}').setData({
             "uid": user.uid,
             "displayName": user.displayName,
             "email": user.email,
             "finalLogin": now,
-            "level": "guest"
           });
         });
         //입장권한이 안됨

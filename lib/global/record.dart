@@ -6,13 +6,16 @@ class Record {
   final String uid;
   final String phoneNumber;
   final String classof;
+  final String level;
   final DocumentReference reference;
 
   Record.fromMap(Map<String, dynamic> map, {this.reference})
       : assert(map['displayName'] != null),
         assert(map['email'] != null),
         assert(map['uid'] != null),
+        assert(map['level']!=null),
         //assert(map['phoneNumber] != null),
+        level = map['level'],
         uid = map['uid'],
         displayName = map['displayName'],
         email = map['email'],

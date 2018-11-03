@@ -42,7 +42,7 @@ class CurrentUser {
     this._finalLogin = finalLogin;
     this._photoUrl = photoUrl;
     this._uid = uid;
-    db = await Firestore.instance.collection('users').document(_uid).get();
+    db = await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(_uid).get();
     if(db.exists){
       setlevel();
       _init();

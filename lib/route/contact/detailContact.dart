@@ -33,7 +33,7 @@ class DetailPage extends StatelessWidget {
         children: <Widget>[
           Container(
             decoration: new BoxDecoration(
-              image: new DecorationImage(image: new AssetImage("assets/images/11.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+              image: new DecorationImage(image: new AssetImage("assets/images/11.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
             ),
           ),
           NestedScrollView(

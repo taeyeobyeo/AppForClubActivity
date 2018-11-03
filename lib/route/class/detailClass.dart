@@ -15,6 +15,8 @@ class DetailClassPage extends StatefulWidget {
 
 class DetailClassState extends State<DetailClassPage>{
   TextEditingController _classofController = TextEditingController();
+  TextEditingController _addProffessor = TextEditingController();
+
   final Map<String,dynamic> data;
   List<dynamic> proffessors;
   DetailClassState({Key key, @required this.data})
@@ -26,6 +28,24 @@ class DetailClassState extends State<DetailClassPage>{
     proffessors = data["head"]["교수님"].toList();
     // print(proffessors);
     super.initState();
+  }
+
+  String _add(){
+    String prof = _addProffessor.text;
+    _addProffessor.clear();
+    if(prof != ""){
+      setState(() {
+        proffessors.add(prof);
+      });
+    }
+    Firestore.instance.collection('club').document('슬기짜기').collection('classes').document(data['head']['title']).setData({
+      "head":{
+        "title": data['head']['title'],
+        "교수님": proffessors,
+      },
+      "body": data['body']
+    });
+    return prof;
   }
 
   Future<Null> _fixDescription() async {
@@ -72,15 +92,13 @@ class DetailClassState extends State<DetailClassPage>{
   }
 
   FloatingActionButton _fix(){
-    if(cu.currentUser.getLevel() == "admin")
-      return FloatingActionButton(
-        backgroundColor: Colors.white70,
-        child: Icon(Icons.subject, color: Theme.of(context).accentColor,),
-        onPressed: (){
-          _fixDescription();
-        },
-      );
-    else return null;
+    return FloatingActionButton(
+      backgroundColor: Colors.white70,
+      child: Icon(Icons.subject, color: Theme.of(context).accentColor,),
+      onPressed: (){
+        _fixDescription();
+      },
+    );
   }
 
   @override
@@ -92,7 +110,7 @@ class DetailClassState extends State<DetailClassPage>{
         children: <Widget>[
           Container(
             decoration: new BoxDecoration(
-              image: new DecorationImage(image: new AssetImage("assets/images/24.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+              image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
             ),
           ),
           NestedScrollView(
@@ -106,7 +124,15 @@ class DetailClassState extends State<DetailClassPage>{
                   centerTitle: true,
                   backgroundColor: Colors.white70,
                   floating: true,
-                  snap: true,
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: (){
+                        Firestore.instance.collection('club').document("슬기짜기").collection('classes').document(data['head']['title']).delete();
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
                 ),
               ];
             },
@@ -122,13 +148,98 @@ class DetailClassState extends State<DetailClassPage>{
                 ListView(
                   padding: EdgeInsets.all(20.0),
                   children: <Widget>[
-                    ListTile(
-                      leading: Text("교수님:"),
-                      title: Text(proffessors.toString()),
+                    ExpansionTile(
+                      title: Row(
+                        children: <Widget>[
+                          Icon(Icons.school),
+                          Text(" 교수님"),
+                        ],
+                      ),
+                      children: <Widget>[
+                        Builder(
+                          builder: (context){
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Container(
+                                  // height: 40.0,
+                                  width: MediaQuery.of(context).size.width/2 - 10,
+                                  child: TextField(
+                                    controller: _addProffessor,
+                                    maxLength: 10,
+                                    maxLines: 1,
+                                    decoration: InputDecoration.collapsed(
+                                      hintText: "교수님을 추가해주세요",
+                                    ),
+                                  ),
+                                ),
+                                FlatButton(
+                                  child: Text("추가"),
+                                  onPressed: (){
+                                    String prof = _add();
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content:Text(prof+ " 추가됨"),
+                                    ));
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),           
+                        Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(00.0),
+                              child: ListTile(
+                                trailing: Text("밀어서 삭제"),
+                                // leading: Text("Scroll to search"),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                border: Border.all(),
+                              ),
+                              width: MediaQuery.of(context).size.width -20,
+                              height: MediaQuery.of(context).size.height/4,
+                              child: ListView.builder(
+                                itemCount: proffessors.length,
+                                itemBuilder: (context, index){
+                                  final proffessor = proffessors[index].toString();
+                                  return Dismissible(
+                                    key: Key(proffessor),
+                                    child: ListTile(title:Text(proffessor)),
+                                    onDismissed: (direction){
+                                      setState((){
+                                        proffessors.removeAt(index);
+                                      });
+                                      Firestore.instance.collection('club').document('슬기짜기').collection('classes').document(data['head']['title']).setData({
+                                        "head":{
+                                          "title": data['head']['title'],
+                                          "교수님": proffessors,
+                                        },
+                                        "body": data['body'],
+                                      });
+                                      Scaffold.of(context).showSnackBar(
+                                        SnackBar(content: Text(proffessor +" 삭제됨"),)
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    Text(
-                      _classofController.text,
-                      softWrap: true,
+                    ExpansionTile(
+                      title: Text("설명"),
+                      children: <Widget>[
+                        Text(
+                          _classofController.text,
+                          softWrap: true,
+                        ),
+                      ],
                     ),
                   ],
                 ),

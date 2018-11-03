@@ -42,7 +42,7 @@ class LoginFailPage extends StatelessWidget{
                         cu.currentUser.googleLogOut();
                         await FirebaseAuth.instance.signOut();
                         //db삭제
-                        Firestore.instance.collection('users').document(id).delete();
+                        Firestore.instance.collection('club').document('슬기짜기').collection('guest').document(id).delete();
                         Navigator.pop(context);
                       },
                     ),

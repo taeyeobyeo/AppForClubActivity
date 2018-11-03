@@ -6,7 +6,6 @@ import 'package:project_sle/global/record.dart';
 class ContactPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => ContactState();
-
 }
 
 class ContactState extends State<ContactPage> {
@@ -19,6 +18,7 @@ class ContactState extends State<ContactPage> {
       ),
       margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
       child: ListTile(
+        leading: record.level =="admin"? Icon(Icons.star):SizedBox(),
         title: Text(record.displayName),
         trailing: Text(record.phoneNumber),
         onTap: (){
@@ -35,7 +35,7 @@ class ContactState extends State<ContactPage> {
   
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('users').snapshots(),
+      stream: Firestore.instance.collection('club').document('슬기짜기').collection('users').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
 
@@ -53,7 +53,6 @@ class ContactState extends State<ContactPage> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     final record = Record.fromSnapshot(data);
-
     return Padding(
       key: ValueKey(record.displayName),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -70,7 +69,7 @@ class ContactState extends State<ContactPage> {
             tag:'image11',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/11.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/11.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
               ),
             ),
           ),

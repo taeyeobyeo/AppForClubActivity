@@ -46,7 +46,7 @@ class SecretState extends State<SecretPage>{
             tag:'image37',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/37.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/37.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.overlay), fit: BoxFit.cover,),
               ),
             ),
           ),
@@ -79,7 +79,7 @@ class SecretState extends State<SecretPage>{
                           children: <Widget>[
                             ListTile(
                               title: Text("새로운 승인요청"),
-                              onTap: (){},
+                              onTap: ()=>Navigator.pushNamed(context, '/addUser'),
                             ),
                           ],
                         ),

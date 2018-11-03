@@ -76,7 +76,7 @@ class IntroState extends State<IntroPage> {
             tag:'image16',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/16.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/16.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
               ),
             ),
           ),
@@ -105,7 +105,7 @@ class IntroState extends State<IntroPage> {
                   children: <Widget>[
                     Container(
                       height: MediaQuery.of(context).size.height/4*3,
-                      margin: EdgeInsets.fromLTRB(20.0,40.0,20.0,20.0),
+                      margin: EdgeInsets.fromLTRB(20.0,30.0,20.0,20.0),
                       decoration: new BoxDecoration(
                         color: Colors.white70,
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
