@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:project_sle/global/currentUser.dart' as cu;
 
 class DetailClassPage extends StatefulWidget {
   final Map<String,dynamic> data;

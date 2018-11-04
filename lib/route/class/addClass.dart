@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_sle/global/currentUser.dart'as cu;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddClassPage extends StatefulWidget {

@@ -18,6 +18,8 @@ import 'package:project_sle/route/configure/general/mobileSpecification.dart';
 import 'package:project_sle/route/database/addData.dart';
 import 'package:project_sle/route/class/addClass.dart';
 import 'package:project_sle/route/configure/member/addUser.dart';
+import 'package:project_sle/route/configure/member/members.dart';
+import 'package:project_sle/route/configure/member/admins.dart';
 
 void main() => runApp(RouteApp());
 
@@ -52,6 +54,8 @@ class RouteState extends State<RouteApp> {
         '/addData': (context) => AddDataPage(),
         '/addClass': (context) => AddClassPage(),
         '/addUser' : (context) => AddUserPage(),
+        '/members' : (context) => MembersPage(),
+        '/admins' : (context) => AdminPage(),
       },
     );
   }

@@ -8,10 +8,10 @@ class PersonalPage extends StatefulWidget{
   State<StatefulWidget> createState() => PersonalState();
 }
 
-class PersonalState extends State<PersonalPage>{
+class PersonalState extends State<PersonalPage> with TickerProviderStateMixin {
   List<Widget> strings = List();
   TextEditingController _classofController = TextEditingController();
-  
+
   Future<Null> _fixClass() async {
     return showDialog<Null>(
       context: context,
@@ -123,6 +123,28 @@ class PersonalState extends State<PersonalPage>{
     );
   }
 
+  // Widget _buildAnimation(BuildContext context, Widget child) {
+  //   return Container(
+  //     padding: padding.value,
+  //     alignment: Alignment.bottomCenter,
+  //     child: Opacity(
+  //       opacity: opacity.value,
+  //       child: Container(
+  //         width: width.value,
+  //         height: height.value,
+  //         decoration: BoxDecoration(
+  //           color: color.value,
+  //           border: Border.all(
+  //             color: Colors.indigo[300],
+  //             width: 3.0,
+  //           ),
+  //           borderRadius: borderRadius.value,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,15 +161,43 @@ class PersonalState extends State<PersonalPage>{
           CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
-                title: const Text('개인 정보',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                // title: const Text('개인 정보',
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
+                centerTitle: true,
+                // floating: true,
+                // snap: true,
+                backgroundColor: Colors.white70,
+                expandedHeight: 200.0,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text("개인정보관리",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      )),
+                  // background: Center(
+                  //   child: AnimatedBuilder(
+                  //     builder: _buildAnimation,
+                  //     animation: controller,
+                  //   ),
+                  // ),
+                  background: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Text("학번과 전화번호를 입력해주세요!",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                centerTitle: true,
-                floating: true,
-                snap: true,
-                backgroundColor: Colors.white70,
               ),
               SliverList(
                 delegate: SliverChildListDelegate([

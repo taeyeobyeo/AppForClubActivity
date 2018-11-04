@@ -54,7 +54,7 @@ class SecretState extends State<SecretPage>{
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  title: Text("설정",
+                  title: Text("동아리 회원 관리",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   )),
@@ -89,9 +89,15 @@ class SecretState extends State<SecretPage>{
                           children: <Widget>[
                             ListTile(
                               title: Text("임원단"),
+                              onTap: (){
+                                Navigator.pushNamed(context, '/admins');
+                              },
                             ),
                             ListTile(
                               title: Text("회원관리"),
+                              onTap: (){
+                                Navigator.pushNamed(context, '/members');
+                              },
                             ),
                             ListTile(
                               title: Text("활동인원"),
@@ -99,36 +105,36 @@ class SecretState extends State<SecretPage>{
                           ],
                         ),
                       ),
-                      _whiteEdgeBox("아직 안정함",
-                        ListView(
-                          children: <Widget>[
-                            ListTile(
-                              title: Text("임원단"),
-                            ),
-                            ListTile(
-                              title: Text("회원관리"),
-                            ),
-                            ListTile(
-                              title: Text("활동인원"),
-                            ),
-                          ],
-                        ),
-                      ),
-                      _whiteEdgeBox("뭐로할까",
-                        ListView(
-                          children: <Widget>[
-                            ListTile(
-                              title: Text("임원단"),
-                            ),
-                            ListTile(
-                              title: Text("회원관리"),
-                            ),
-                            ListTile(
-                              title: Text("활동인원"),
-                            ),
-                          ],
-                        ),
-                      )
+                      // _whiteEdgeBox("아직 안정함",
+                      //   ListView(
+                      //     children: <Widget>[
+                      //       ListTile(
+                      //         title: Text("임원단"),
+                      //       ),
+                      //       ListTile(
+                      //         title: Text("회원관리"),
+                      //       ),
+                      //       ListTile(
+                      //         title: Text("활동인원"),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // _whiteEdgeBox("뭐로할까",
+                      //   ListView(
+                      //     children: <Widget>[
+                      //       ListTile(
+                      //         title: Text("임원단"),
+                      //       ),
+                      //       ListTile(
+                      //         title: Text("회원관리"),
+                      //       ),
+                      //       ListTile(
+                      //         title: Text("활동인원"),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // )
                     ],
                   );
                 },

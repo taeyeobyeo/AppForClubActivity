@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_sle/global/record.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatelessWidget {
   final Record record;
@@ -7,25 +8,73 @@ class DetailPage extends StatelessWidget {
     : assert(record != null),
     super(key: key);
   ListView info(){
-    
     return ListView(
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(10.0),
       children: <Widget>[
+        record.level == "admin"?
         ListTile(
-          title: Text("email:"),
-          trailing: Text(record.email),
-        ),
+          leading: Icon(Icons.star,
+            color: Colors.yellow,
+          ),
+          title: Text("serving as"),
+          trailing: Text(record.specific),
+        )
+        :SizedBox(),
         ListTile(
+          leading: Icon(Icons.school,
+            color: Colors.black,
+          ),
           title: Text("학번:"),
           trailing: Text(record.classof),
         ),
         ListTile(
+          leading: Icon(Icons.email,
+            color: Colors.white,
+          ),
+          title: Text("email:"),
+          trailing: Text(record.email,
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          onTap: ()=>_mail(record.email),
+        ),
+        
+        ListTile(
+          leading: Icon(Icons.call,
+            color: Colors.green,
+          ),
           title: Text("전화번호:"),
-          trailing: Text(record.phoneNumber),
+          trailing: Text(record.phoneNumber,
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          onTap: ()=>_call(record.phoneNumber),
         ),
       ],
     );
   }
+  _call(url) async {
+    String call = "tel://" + url;
+    if (await canLaunch(call)) {
+      await launch(call);
+    } else {
+      print("failed");
+    }
+  }
+
+  _mail(url) async {
+    if (url != ""){
+      String call = "mailto:" + url;
+      if (await canLaunch(call)) {
+        await launch(call);
+      } else {
+        print("failed");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

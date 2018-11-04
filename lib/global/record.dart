@@ -7,6 +7,7 @@ class Record {
   final String phoneNumber;
   final String classof;
   final String level;
+  final String specific;
   final DocumentReference reference;
 
   Record.fromMap(Map<String, dynamic> map, {this.reference})
@@ -31,7 +32,8 @@ class Record {
           + map['phoneNumber'][8]
           + map['phoneNumber'][9]
           + map['phoneNumber'][10],
-        classof = map['classof'] == null ? "미등록" : map['classof'];
+        classof = map['classof'] == null ? "미등록" : map['classof'],
+        specific = map['specific'] ==null? "": map['specific'];
 
   Record.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);

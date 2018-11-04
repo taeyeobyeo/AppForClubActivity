@@ -56,12 +56,8 @@ class AddUserState extends State<AddUserPage>{
                     title: Text("승인요청",
                         style: TextStyle(
                           fontSize: 20.0,
-                          // fontWeight: FontWeight.bold
                         )),
                     background: Container(
-                      decoration: BoxDecoration(
-
-                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
@@ -83,10 +79,10 @@ class AddUserState extends State<AddUserPage>{
                       ),
                     ),
                   ),
-                  pinned: true,
+                  // pinned: true,
                   // centerTitle: true,
-                  // floating: true,
-                  // snap: true,
+                  floating: true,
+                  snap: true,
                 ),
               ];
             },
@@ -111,18 +107,26 @@ class AddUserState extends State<AddUserPage>{
                                     color: Colors.white70,
                                     border: Border.all(),
                                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                    // gradient: LinearGradient(
-                                    //   colors: [
-                                    //     Colors.blue,
-                                    //     Colors.red
-                                    //   ]
-                                    // ),
                                   ),
                                   child: ExpansionTile(
-                                    title: Text(data['displayName']),
+                                    title: Text("이름:   " + data['displayName']),
                                     children: <Widget>[
-                                      Text(data['email']),
-                                      Text(data['finalLogin'].toString()),
+                                      Container(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            ListTile(
+                                              leading: Text("email: "),
+                                              trailing: Text(data['email']),
+                                            ),
+                                            ListTile(
+                                              leading: Text("Request at: "),
+                                              trailing: Text(data['finalLogin'].toString()),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
