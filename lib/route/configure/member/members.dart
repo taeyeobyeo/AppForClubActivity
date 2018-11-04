@@ -24,6 +24,7 @@ class MembersState extends State<MembersPage> {
           if (value)
             Firestore.instance.collection('club').document('슬기짜기').collection('users').document(record.uid).updateData({
               "level": "admin",
+              "specific": "미입력"
             });
           else 
             Firestore.instance.collection('club').document('슬기짜기').collection('users').document(record.uid).updateData({
@@ -96,7 +97,7 @@ class MembersState extends State<MembersPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Text("주의: toggle시 관리자권한이 주어집니다.\n실제 임원단에게만 부여해 주시기 바랍니다.",
+                          Text("주의: toggle시 관리자권한이 주어집니다.",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,

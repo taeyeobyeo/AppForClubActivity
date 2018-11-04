@@ -18,7 +18,7 @@ class ContactState extends State<ContactPage> {
       ),
       margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
       child: ListTile(
-        leading: record.level =="admin"? Icon(Icons.star):SizedBox(),
+        leading: record.level =="admin"? Icon(Icons.star,color: Colors.yellow,):SizedBox(),
         title: Text(record.displayName),
         trailing: Text(record.phoneNumber),
         onTap: (){

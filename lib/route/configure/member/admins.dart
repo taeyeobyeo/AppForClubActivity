@@ -8,7 +8,7 @@ class AdminPage extends StatefulWidget{
 }
 
 class AdminState extends State<AdminPage> {
-  List<String> items = ["회장","부회장","총무","전임원"].toList();
+  List<String> items = ["회장","부회장","총무","전임원","미입력"].toList();
   
   Container builder(Record record){
     final dropdownMenuOptions = items
@@ -46,7 +46,6 @@ class AdminState extends State<AdminPage> {
       stream: Firestore.instance.collection('club').document('슬기짜기').collection('users').where("level", isEqualTo: "admin").snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
-
         return _buildList(context, snapshot.data.documents);
       },
     );
@@ -82,10 +81,6 @@ class AdminState extends State<AdminPage> {
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  // title: Text("회원 관리",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  // )),
                   centerTitle: true,
                   backgroundColor: Colors.white70,
                   expandedHeight: 200.0,
@@ -109,7 +104,6 @@ class AdminState extends State<AdminPage> {
                       ),
                     ),
                   ),
-                  // pinned: true,
                   floating: true,
                   snap: true,
                 ),

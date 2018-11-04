@@ -101,6 +101,9 @@ class SecretState extends State<SecretPage>{
                             ),
                             ListTile(
                               title: Text("활동인원"),
+                              onTap: (){
+                                Navigator.pushNamed(context, '/active');
+                              },
                             ),
                           ],
                         ),

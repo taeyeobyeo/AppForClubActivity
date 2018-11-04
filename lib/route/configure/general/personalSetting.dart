@@ -27,7 +27,7 @@ class PersonalState extends State<PersonalPage> with TickerProviderStateMixin {
                   controller: _classofController,
                   maxLength: 2,
                   decoration: InputDecoration.collapsed(
-                    hintText: cu.currentUser.getClass(),
+                    hintText: "'13','15'와 같이 학번을 입력해주세요",
                   ),
                 ),
               ],
