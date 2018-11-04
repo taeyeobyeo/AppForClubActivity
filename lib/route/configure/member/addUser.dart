@@ -50,20 +50,17 @@ class AddUserState extends State<AddUserPage>{
                   //     fontWeight: FontWeight.bold,
                   // )),
                   backgroundColor: Colors.white70,
-                  expandedHeight: 150.0,
+                  expandedHeight: 200.0,
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
                     title: Text("승인요청",
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 20.0,
+                          // fontWeight: FontWeight.bold
                         )),
                     background: Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.black54
-                          ]
-                        ),
+
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -72,14 +69,14 @@ class AddUserState extends State<AddUserPage>{
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
-                              color: Colors.black
+                              color: Colors.redAccent
                             ),
                           ),
                           Text("Swipe Right to ADD>>",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
-                              color: Colors.white
+                              color: Colors.indigoAccent
                             ),
                           ),
                         ],

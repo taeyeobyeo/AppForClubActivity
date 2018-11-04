@@ -82,15 +82,14 @@ class DetailDataState extends State<DetailDataPage>{
   }
 
   IconButton _delete(){
-    if(cu.currentUser.getLevel() == "admin")
-      return IconButton(
-        icon: Icon(Icons.delete),
-        onPressed: (){
-          Firestore.instance.collection('club').document('슬기짜기').collection('database').document(data["head"]["title"]).delete();
-          Navigator.pop(context);
-        },
-      );
-    else return null;
+    return IconButton(
+      icon: Icon(Icons.delete),
+      disabledColor: Colors.transparent,
+      onPressed: cu.currentUser.getLevel() == "admin"?(){
+        Firestore.instance.collection('club').document('슬기짜기').collection('database').document(data["head"]["title"]).delete();
+        Navigator.pop(context);
+      }:null,
+    );
   }
 
   @override
