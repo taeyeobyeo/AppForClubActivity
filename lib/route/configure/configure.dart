@@ -45,8 +45,10 @@ class ConfigureState extends State<ConfigurePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-          children: <Widget>[
-          Container(
+        children: <Widget>[
+          Hero(
+            tag: "image37",
+            child:  Container(
             decoration: new BoxDecoration(
               image: new DecorationImage(
                 image: new AssetImage("assets/images/37.jpg"), 
@@ -54,6 +56,7 @@ class ConfigureState extends State<ConfigurePage> {
                 fit: BoxFit.cover,
               ),
             ),
+          ),
           ),
           NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -88,12 +91,6 @@ class ConfigureState extends State<ConfigurePage> {
                                 Navigator.pushNamed(context, '/personal');
                                 // fixPersonal();
                               },
-                            ),
-                            ListTile(
-                              title: Text("회원탈퇴"),
-                            ),
-                            ListTile(
-                              title: Text("회원탈퇴"),
                             ),
                             ListTile(
                               title: Text("회원탈퇴"),

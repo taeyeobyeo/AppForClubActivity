@@ -165,7 +165,7 @@ class DetailClassState extends State<DetailClassPage>{
                                   width: MediaQuery.of(context).size.width/2 - 10,
                                   child: TextField(
                                     controller: _addProffessor,
-                                    maxLength: 10,
+                                    maxLength: 20,
                                     maxLines: 1,
                                     decoration: InputDecoration.collapsed(
                                       hintText: "교수님을 추가해주세요",
