@@ -95,6 +95,7 @@ class HomeState extends State<HomePage>{
             ListTile(
               title: Text("동아리 회원관리"),
               onTap: (){
+                Navigator.pop(context);
                 Navigator.pushNamed(context, '/secret');
               },
             ),
@@ -141,6 +142,8 @@ class HomeState extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
+    if(cu.currentUser.getUid() == null) Navigator.pop(context);
+    
     return Scaffold(
       key: _scaffoldKey,
       // appBar: AppBar(

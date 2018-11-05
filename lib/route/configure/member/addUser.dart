@@ -86,7 +86,7 @@ class AddUserState extends State<AddUserPage>{
                 ),
               ];
             },
-            body: Column(
+            body: ListView(
               children: <Widget>[
                 _whiteEdgeBox(
                   StreamBuilder<QuerySnapshot>(
@@ -95,7 +95,7 @@ class AddUserState extends State<AddUserPage>{
                       if (!snapshot.hasData) return LinearProgressIndicator();
                       return Container(
                         width: MediaQuery.of(context).size.width-20,
-                        height: MediaQuery.of(context).size.height/2,
+                        height: MediaQuery.of(context).size.height/3*2,
                         child: ListView(
                           padding: EdgeInsets.all(20.0),
                           children: snapshot.data.documents.map((data){
@@ -133,12 +133,18 @@ class AddUserState extends State<AddUserPage>{
                                 onDismissed: (direction){
                                   if(direction == DismissDirection.endToStart){
                                     //delete
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(data['displayName']+" 삭제됨"),));
                                   }
                                   else{
                                     Firestore.instance.collection('club').document('슬기짜기').collection('users').document(data['uid']).setData({
+                                      "displayName":data['displayName'],
                                       "uid": data['uid'],
+                                      "email": data['email'],
                                       "level": "member",
                                     });
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(data['displayName']+" 추가됨"),));
                                   }
                                   Firestore.instance.collection('club').document('슬기짜기').collection('guest').document(data['uid']).delete();
                                 },

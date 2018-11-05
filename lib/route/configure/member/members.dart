@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_sle/global/record.dart';
+import 'package:project_sle/global/currentUser.dart' as cu;
 
 class MembersPage extends StatefulWidget{
   @override
@@ -9,7 +10,7 @@ class MembersPage extends StatefulWidget{
 
 class MembersState extends State<MembersPage> {
   
-  Container builder(Record record){
+  Container builder(RecordS record){
     bool a = record.level == "admin"? true : false;
     return Container(
       decoration: new BoxDecoration(
@@ -26,10 +27,14 @@ class MembersState extends State<MembersPage> {
               "level": "admin",
               "specific": "미입력"
             });
-          else 
+          else {
             Firestore.instance.collection('club').document('슬기짜기').collection('users').document(record.uid).updateData({
               "level": "member",
             });
+            if(record.uid == cu.currentUser.getUid()){
+              cu.currentUser.setlevelDirect("member");
+            }
+          }
           setState(() {
             a = value;
           });
@@ -57,7 +62,7 @@ class MembersState extends State<MembersPage> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
+    final record = RecordS.fromSnapshot(data);
     return Padding(
       key: ValueKey(record.displayName),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),

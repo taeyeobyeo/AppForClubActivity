@@ -43,3 +43,29 @@ class Record {
   @override
   String toString() => "Record<$displayName:$email>";
 }
+
+
+class RecordS {
+  final String displayName;
+  final String uid;
+  final String level;
+  final String specific;
+  final String state;
+  final DocumentReference reference;
+
+  RecordS.fromMap(Map<String, dynamic> map, {this.reference})
+      : assert(map['displayName'] != null),
+        assert(map['uid'] != null),
+        assert(map['level']!=null),
+        level = map['level'],
+        uid = map['uid'],
+        displayName = map['displayName'],
+        specific = map['specific'] ==null? "": map['specific'],
+        state = map['state'] ==null? "": map['state'];
+
+  RecordS.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
+
+  @override
+  String toString() => "RecordS<$displayName>";
+}

@@ -10,7 +10,7 @@ class AdminPage extends StatefulWidget{
 class AdminState extends State<AdminPage> {
   List<String> items = ["회장","부회장","총무","전임원","미입력"].toList();
   
-  Container builder(Record record){
+  Container builder(RecordS record){
     final dropdownMenuOptions = items
       .map((String item) =>
         new DropdownMenuItem<String>(value: item, child: new Text(item))
@@ -59,7 +59,7 @@ class AdminState extends State<AdminPage> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
+    final record = RecordS.fromSnapshot(data);
     return Padding(
       key: ValueKey(record.displayName),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),

@@ -77,6 +77,9 @@ class CurrentUser {
   void setlevel() {
     _level = db.data['level'];
   }
+  void setlevelDirect(String input) {
+    _level = input;
+  }
   void _init(){
     var classof = db.data['classof'];
     var phoneNumber = db.data['phoneNumber'];

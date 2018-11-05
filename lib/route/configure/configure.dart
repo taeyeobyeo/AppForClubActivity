@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_sle/global/currentUser.dart' as cu;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ConfigurePage extends StatefulWidget{
   @override
@@ -29,6 +32,46 @@ class ConfigureState extends State<ConfigurePage> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<Null> _fixDescription() async {
+    return showDialog<Null>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("회원탈퇴"),
+          contentPadding: EdgeInsets.all(30.0),
+          content: SingleChildScrollView(
+            child: Text("주의: 탈퇴시 재가입하려면 새로 승인을 받아야 합니다.",
+              style: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold
+              ),
+              softWrap: true,
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('취소'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            RaisedButton(
+              child: Text('확인'),
+              onPressed: (){
+                Navigator.pop(context);
+                Navigator.pop(context);
+                Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid()).delete();
+                cu.currentUser.googleLogOut();
+                FirebaseAuth.instance.signOut();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -94,6 +137,9 @@ class ConfigureState extends State<ConfigurePage> {
                             ),
                             ListTile(
                               title: Text("회원탈퇴"),
+                              onTap: (){
+                                _fixDescription();
+                              },
                             ),
                           ],
                         )
