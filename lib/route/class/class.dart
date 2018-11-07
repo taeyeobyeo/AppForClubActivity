@@ -98,7 +98,13 @@ class ClassState extends State<ClassPage>{
   FloatingActionButton _fix(){
     return FloatingActionButton(
       backgroundColor: Colors.white70,
-      child: Icon(Icons.add, color: Theme.of(context).accentColor,),
+      child: 
+      Text("추가",
+          style: TextStyle(
+            color: Colors.black
+          ),
+        ), 
+      // Icon(Icons.add, color: Theme.of(context).accentColor,),
       onPressed: (){
         Navigator.pushNamed(context, '/addClass');
       },
@@ -126,7 +132,7 @@ class ClassState extends State<ClassPage>{
             tag:'image15',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.black26, BlendMode.darken), fit: BoxFit.cover,),
               ),
             ),
           ),

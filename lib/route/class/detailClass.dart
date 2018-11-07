@@ -93,7 +93,14 @@ class DetailClassState extends State<DetailClassPage>{
   FloatingActionButton _fix(){
     return FloatingActionButton(
       backgroundColor: Colors.white70,
-      child: Icon(Icons.subject, color: Theme.of(context).accentColor,),
+      child: 
+      Text("편집",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+          softWrap: true,
+        ), 
+      // Icon(Icons.subject, color: Theme.of(context).accentColor,),
       onPressed: (){
         _fixDescription();
       },
@@ -109,7 +116,7 @@ class DetailClassState extends State<DetailClassPage>{
         children: <Widget>[
           Container(
             decoration: new BoxDecoration(
-              image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
+              image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.black26, BlendMode.darken), fit: BoxFit.cover,),
             ),
           ),
           NestedScrollView(

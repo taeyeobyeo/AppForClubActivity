@@ -43,11 +43,18 @@ class PersonalState extends State<PersonalPage> with TickerProviderStateMixin {
             RaisedButton(
               child: Text('수정'),
               onPressed: () async{
-                await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
-                  "classof": _classofController.text,
-                });
-                cu.currentUser.setClass(_classofController.text);
-                _classofController.clear();
+                if(_classofController.text != ""){ 
+                  await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
+                    "classof": _classofController.text,
+                  });
+                  cu.currentUser.setClass(_classofController.text);
+                  _classofController.clear();
+                }
+                else{
+                  await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
+                    "classof": null,
+                  });
+                }
                 Navigator.of(context).pop();
               },
             ),
@@ -88,11 +95,18 @@ class PersonalState extends State<PersonalPage> with TickerProviderStateMixin {
             RaisedButton(
               child: Text('수정'),
               onPressed: () async{
-                await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
-                  "phoneNumber": _classofController.text,
-                });
-                cu.currentUser.setPhoneNumber(_classofController.text);
-                _classofController.clear();
+                if(_classofController.text != ""){ 
+                  await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
+                    "phoneNumber": _classofController.text,
+                  });
+                  cu.currentUser.setPhoneNumber(_classofController.text);
+                  _classofController.clear();
+                }
+                else{
+                  await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(cu.currentUser.getUid().toString()).updateData({
+                    "phoneNumber": null,
+                  });
+                }
                 Navigator.of(context).pop();
               },
             ),
@@ -150,12 +164,9 @@ class PersonalState extends State<PersonalPage> with TickerProviderStateMixin {
     return Scaffold(
       body: Stack(
           children: <Widget>[
-          Hero(
-            tag:'image37',
-            child: Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/37.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.overlay), fit: BoxFit.cover,),
-              ),
+          Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(image: new AssetImage("assets/images/37.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.overlay), fit: BoxFit.cover,),
             ),
           ),
           CustomScrollView(

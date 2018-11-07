@@ -73,7 +73,13 @@ class DetailDataState extends State<DetailDataPage>{
     if(cu.currentUser.getLevel() == "admin")
       return FloatingActionButton(
         backgroundColor: Colors.white70,
-        child: Icon(Icons.subject, color: Theme.of(context).accentColor,),
+        child: 
+        Text("편집",
+          style: TextStyle(
+            color: Colors.black
+          ),
+        ), 
+        // Icon(Icons.subject, color: Theme.of(context).accentColor,),
         onPressed: (){
           _fixDescription();
         },

@@ -93,7 +93,13 @@ class DatabaseState extends State<DatabasePage>{
     if(cu.currentUser.getLevel() == "admin")
       return FloatingActionButton(
         backgroundColor: Colors.white70,
-        child: Icon(Icons.subject, color: Theme.of(context).accentColor,),
+        child:
+        Text("추가",
+          style: TextStyle(
+            color: Colors.black
+          ),
+        ),  
+        // Icon(Icons.subject, color: Theme.of(context).accentColor,),
         onPressed: (){
           Navigator.pushNamed(context, '/addData');
         },

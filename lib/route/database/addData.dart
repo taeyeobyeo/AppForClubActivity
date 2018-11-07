@@ -87,12 +87,9 @@ class AddDataState extends State<AddDataPage>{
       floatingActionButton: _submit(),
       body: Stack(
           children: <Widget>[
-          Hero(
-            tag:'image2',
-            child: Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/2.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
-              ),
+          Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(image: new AssetImage("assets/images/2.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
             ),
           ),
           NestedScrollView(

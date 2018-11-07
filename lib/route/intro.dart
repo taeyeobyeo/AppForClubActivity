@@ -58,7 +58,13 @@ class IntroState extends State<IntroPage> {
     if(cu.currentUser.getLevel() == "admin")
       return FloatingActionButton(
         backgroundColor: Colors.white70,
-        child: Icon(Icons.subject, color: Theme.of(context).accentColor,),
+        child:
+        Text("편집",
+          style: TextStyle(
+            color: Colors.black
+          ),
+        ), 
+        // Icon(Icons.subject, color: Theme.of(context).accentColor,),
         onPressed: (){
           _fixDescription();
         },
@@ -73,10 +79,10 @@ class IntroState extends State<IntroPage> {
       body: Stack(
           children: <Widget>[
           Hero(
-            tag:'image16',
+            tag:'image19',
             child: Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/16.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("assets/images/19.jpg"), colorFilter: ColorFilter.mode(Colors.black12, BlendMode.darken), fit: BoxFit.cover,),
               ),
             ),
           ),

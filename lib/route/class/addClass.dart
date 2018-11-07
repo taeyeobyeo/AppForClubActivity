@@ -50,13 +50,10 @@ class AddClassState extends State<AddClassPage>{
     return Scaffold(
       floatingActionButton: _submit(),
       body: Stack(
-          children: <Widget>[
-          Hero(
-            tag:'image15',
-            child: Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken), fit: BoxFit.cover,),
-              ),
+        children: <Widget>[
+          Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(image: new AssetImage("assets/images/15.jpg"), colorFilter: ColorFilter.mode(Colors.black26, BlendMode.darken), fit: BoxFit.cover,),
             ),
           ),
           NestedScrollView(

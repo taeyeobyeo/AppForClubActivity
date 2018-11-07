@@ -25,7 +25,7 @@ class HomeState extends State<HomePage>{
     Navigator.pop(context);
   }
 
-  Widget imageButton (String text, int pic, BuildContext context, String navigator){
+  Widget imageButton (String text, int pic, BuildContext context, String navigator, BlendMode mode){
     return FlatButton(
       padding: EdgeInsets.all(10.0),
       onPressed: (){
@@ -41,7 +41,7 @@ class HomeState extends State<HomePage>{
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: new AssetImage("assets/images/$pic.jpg"),
-                  colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
+                  colorFilter: ColorFilter.mode(Colors.black26, mode),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -146,28 +146,14 @@ class HomeState extends State<HomePage>{
     
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //     icon: Icon(
-      //       Icons.menu,
-      //       semanticLabel: 'menu',
-      //     ),
-      //     onPressed: (){
-      //       _scaffoldKey.currentState.openDrawer();
-      //     },
-      //   ),
-      //   title: Text("슬기짜기",
-      //             style: TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //             )),
-      //   centerTitle: true,
-      // ),
       drawer: createDrawer(),
       body: 
       NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              // title: Text("슬기짜기"),
+              // centerTitle: true,
               expandedHeight: MediaQuery.of(context).size.height /5,
               pinned: true,
               leading: IconButton(
@@ -183,7 +169,7 @@ class HomeState extends State<HomePage>{
                 centerTitle: true,
                 title: Text("슬기짜기",
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 18.0,
                     )),
                 background: Hero(
                   tag:'image13',
@@ -205,11 +191,11 @@ class HomeState extends State<HomePage>{
                 padding: EdgeInsets.all(16.0),
                 childAspectRatio: 2.4,
                 children: <Widget>[
-                  imageButton("동아리 소개", 16, context,'/intro'),
-                  imageButton("동아리 자료", 2, context,'/database'),
-                  imageButton("자유 계시판", 18, context,''),
-                  imageButton("수업지원", 15, context,'/class'),
-                  imageButton("연락처", 11, context,'/contact'),
+                  imageButton("동아리 소개", 19, context,'/intro', BlendMode.darken),
+                  imageButton("동아리 자료", 2, context,'/database', BlendMode.darken),
+                  imageButton("자유 계시판", 18, context,'/board', BlendMode.darken),
+                  imageButton("수업지원", 15, context,'/class', BlendMode.darken),
+                  imageButton("연락처", 11, context,'/contact', BlendMode.darken),
                 ],
               );
             },
