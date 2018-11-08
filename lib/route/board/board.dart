@@ -66,9 +66,9 @@ class BoardPage extends StatelessWidget {
                     childAspectRatio: 2.4,
                     children: <Widget>[
                       imageButton("공지", context,'/announcement'),
-                      imageButton("잡담", context,''),
-                      imageButton("슬년회", context,''),
-                      imageButton("잡담", context,''),
+                      imageButton("잡담", context,'/smallTalk'),
+                      imageButton("슬년회", context,'/seul'),
+                      imageButton("수업", context,'/classBoard'),
                     ],
                   );
                 },

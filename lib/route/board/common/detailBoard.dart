@@ -20,7 +20,7 @@ class DetailAnnouncementState extends State<DetailAnnouncementPage>{
     : assert(data != null);
   
   Widget imageController (Article article){
-    if(article.image == null) return SizedBox();
+    if(article.image.length == 0) return SizedBox();
     else {
       int len = article.image.length;
       switch(len){
@@ -49,7 +49,7 @@ class DetailAnnouncementState extends State<DetailAnnouncementPage>{
                 FlatButton(
                   child: SizedBox(
                     height: 240.0,
-                    width: MediaQuery.of(context).size.width/2 -20,
+                    width: MediaQuery.of(context).size.width/2,
                     child: Hero(
                       tag: article.id,
                       child: Image(
@@ -66,7 +66,7 @@ class DetailAnnouncementState extends State<DetailAnnouncementPage>{
                 FlatButton(
                   child: SizedBox(
                     height: 240.0,
-                    width: MediaQuery.of(context).size.width/2 - 20,
+                    width: MediaQuery.of(context).size.width/2,
                     child: Hero(
                       tag: article.id+"1",
                       child: Image(
@@ -81,37 +81,6 @@ class DetailAnnouncementState extends State<DetailAnnouncementPage>{
               ],
             ),
           );
-        // Container(
-        //     margin: EdgeInsets.symmetric(vertical: 10.0),
-        //     child: Column(
-        //       children: <Widget>[
-        //         FlatButton(
-        //           child: SizedBox(
-        //             height: 120.0,
-        //             width: MediaQuery.of(context).size.width,
-        //             child: Image(
-        //               image: NetworkImage(article.image[0]),
-        //               fit: BoxFit.cover,
-        //             ),
-        //           ),
-        //           padding: EdgeInsets.all(0.0),
-        //           onPressed: (){},
-        //         ),
-        //         FlatButton(
-        //           child: SizedBox(
-        //             height: 120.0,
-        //             width: MediaQuery.of(context).size.width,
-        //             child: Image(
-        //               image: NetworkImage(article.image[1]),
-        //               fit: BoxFit.cover,
-        //             ),
-        //           ),
-        //           padding: EdgeInsets.all(0.0),
-        //           onPressed: (){},
-        //         ),
-        //       ],
-        //     ),
-        //   );
           break;
         default:
           return Container(
@@ -368,4 +337,9 @@ class DetailAnnouncementState extends State<DetailAnnouncementPage>{
       )
     );
   }
+  @override
+    void dispose() {
+      _reply.dispose();
+      super.dispose();
+    }
 }

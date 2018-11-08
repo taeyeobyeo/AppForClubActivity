@@ -11,6 +11,12 @@ class IntroPage extends StatefulWidget{
 class IntroState extends State<IntroPage> {
   TextEditingController _classofController = TextEditingController();
   
+  @override
+  void dispose() { 
+    _classofController.dispose();
+    super.dispose();
+  }
+
   Future<Null> _fixDescription() async {
     return showDialog<Null>(
       context: context,

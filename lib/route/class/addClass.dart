@@ -13,6 +13,13 @@ class AddClassState extends State<AddClassPage>{
   TextEditingController _body = TextEditingController();
   List<dynamic> proffessors = List();
 
+  @override
+  void dispose() { 
+    _title.dispose();
+    _proffessor.dispose();
+    _body.dispose();
+    super.dispose();
+  }
 
   Container _whiteEdgeBox (Widget widget){
     return Container(

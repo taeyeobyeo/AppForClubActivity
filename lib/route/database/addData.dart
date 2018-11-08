@@ -12,6 +12,13 @@ class AddDataState extends State<AddDataPage>{
   String title = "탭해서 제목 변경";
   TextEditingController _titleController = TextEditingController();
   TextEditingController body = TextEditingController();
+
+  @override
+  void dispose() { 
+    _titleController.dispose();
+    body.dispose();
+    super.dispose();
+  }
   Container _whiteEdgeBox (Widget widget){
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),

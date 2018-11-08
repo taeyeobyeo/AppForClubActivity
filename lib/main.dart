@@ -22,8 +22,10 @@ import 'package:project_sle/route/configure/member/members.dart';
 import 'package:project_sle/route/configure/member/admins.dart';
 import 'package:project_sle/route/configure/member/active.dart';
 import 'package:project_sle/route/board/board.dart';
-import 'package:project_sle/route/board/boards/announcement.dart';
-import 'package:project_sle/route/board/boards/addAnnouncement.dart';
+import 'package:project_sle/route/board/announcement/announcement.dart';
+import 'package:project_sle/route/board/smallTalk/smallTalk.dart';
+import 'package:project_sle/route/board/seul/seul.dart';
+import 'package:project_sle/route/board/class/classBoard.dart';
 
 void main() => runApp(RouteApp());
 
@@ -63,7 +65,9 @@ class RouteState extends State<RouteApp> {
         '/active' : (context) => ActiveUsersPage(),
         '/board' : (context) => BoardPage(),
         '/announcement' : (context) => AnnouncementPage(),
-        '/addAnnouncement' : (context) => AddAnnouncementPage(),
+        '/smallTalk' : (context) => SmallTalkPage(),
+        '/seul' : (context) => SeulPage(),
+        '/classBoard' : (context) => ClassBoardPage(),
       },
     );
   }

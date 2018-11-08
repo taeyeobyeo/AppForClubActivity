@@ -4,7 +4,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:project_sle/global/article.dart';
 import 'package:project_sle/global/currentUser.dart' as cu;
-import './detailAnnouncement.dart';
+import 'package:project_sle/route/board/common/detailBoard.dart';
+import 'package:project_sle/route/board/common/addData.dart';
 
 class AnnouncementPage extends StatefulWidget {
   @override
@@ -12,9 +13,13 @@ class AnnouncementPage extends StatefulWidget {
 }
 
 class AnnouncementState extends State<AnnouncementPage>{
+  int view = 5;
+  void initState() {
+    super.initState();
+  }
 
   Widget imageController (Article article){
-    if(article.image == null) return SizedBox();
+    if(article.image.length == 0) return SizedBox();
     else {
       int len = article.image.length;
       switch(len){
@@ -75,37 +80,6 @@ class AnnouncementState extends State<AnnouncementPage>{
               ],
             ),
           );
-        // Container(
-        //     margin: EdgeInsets.symmetric(vertical: 10.0),
-        //     child: Column(
-        //       children: <Widget>[
-        //         FlatButton(
-        //           child: SizedBox(
-        //             height: 120.0,
-        //             width: MediaQuery.of(context).size.width,
-        //             child: Image(
-        //               image: NetworkImage(article.image[0]),
-        //               fit: BoxFit.cover,
-        //             ),
-        //           ),
-        //           padding: EdgeInsets.all(0.0),
-        //           onPressed: (){},
-        //         ),
-        //         FlatButton(
-        //           child: SizedBox(
-        //             height: 120.0,
-        //             width: MediaQuery.of(context).size.width,
-        //             child: Image(
-        //               image: NetworkImage(article.image[1]),
-        //               fit: BoxFit.cover,
-        //             ),
-        //           ),
-        //           padding: EdgeInsets.all(0.0),
-        //           onPressed: (){},
-        //         ),
-        //       ],
-        //     ),
-        //   );
           break;
         default:
           return Container(
@@ -206,11 +180,13 @@ class AnnouncementState extends State<AnnouncementPage>{
             title: Text(article.name),
             subtitle: Text(article.date.toLocal().toString()),
             trailing: article.uid == cu.currentUser.getUid()?IconButton(icon: Icon(Icons.close),
-              onPressed: ()async{
-                String id = article.id;
-                StorageReference a = await FirebaseStorage.instance.ref().child('/announcement/$id');
-                a.delete();
-                await Firestore.instance.collection('club').document('슬기짜기').collection('announcement').document(id).delete();
+              onPressed: (){
+                int count = article.image.length;
+                StorageReference storageRef = FirebaseStorage.instance.ref().child('/announcement/${article.id}');
+                for(int i = 0;i < count; i++){
+                  storageRef.child('$i').delete();
+                }
+                Firestore.instance.collection('club').document('슬기짜기').collection('announcement').document(article.id).delete();
               },
             ):SizedBox(),
           ),
@@ -286,7 +262,9 @@ class AnnouncementState extends State<AnnouncementPage>{
         ),
         backgroundColor: Colors.white70,
         onPressed: (){
-          Navigator.pushNamed(context, '/addAnnouncement');
+          Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) => AddAnnouncementPage(from:1)),
+          );
         },
       ),
       body: Stack(
@@ -310,28 +288,34 @@ class AnnouncementState extends State<AnnouncementPage>{
                   centerTitle: true,
                   floating: true,
                   snap: true,
-                  // pinned: true,
                 ),
               ];
             },
-            body: 
-            StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('club').document('슬기짜기').collection('announcement').orderBy("id", descending: true).snapshots(),
-              builder: (context,snapshot){
-                if (!snapshot.hasData) return LinearProgressIndicator();
-                return _buildList(context, snapshot.data.documents);
-              },
-            ),
-            // Container(
-            //   width: MediaQuery.of(context).size.width - 20,
-            //   height: MediaQuery.of(context).size.height,
-            //   padding: EdgeInsets.all(10.0),
-            //   child: ListView(
-            //     children: <Widget>[
-            //       card("hi","dsfsd"),
-            //     ],
-            //   ),
-            // ),
+            body: Column(
+              children: <Widget>[
+                Flexible(
+                  child:
+                StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance.collection('club').document('슬기짜기').collection('announcement').orderBy("id", descending: true).limit(view).snapshots(),
+                  builder: (context,snapshot){
+                    if (!snapshot.hasData) return LinearProgressIndicator();
+                    return _buildList(context, snapshot.data.documents);
+                  },
+                ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.replay,color: Colors.white,),
+                  onPressed: ()async{
+                    setState(() {
+                      view+=5;   
+                    });
+                    // print(view);
+                  },
+                )
+                
+              ],
+            )
+            
           ),
         ],
       )

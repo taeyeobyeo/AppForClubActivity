@@ -17,6 +17,12 @@ class DetailDataState extends State<DetailDataPage>{
   TextEditingController _classofController = TextEditingController();
   final Map<String,dynamic> data;
 
+  @override
+  void dispose() { 
+    _classofController.dispose();
+    super.dispose();
+  }
+
   DetailDataState({Key key, @required this.data})
     : assert(data != null);
 

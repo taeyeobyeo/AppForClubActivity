@@ -29,6 +29,12 @@ class DetailClassState extends State<DetailClassPage>{
     super.initState();
   }
 
+  @override
+  void dispose() { 
+    _classofController.dispose();
+    _addProffessor.dispose();
+    super.dispose();
+  }
   String _add(){
     String prof = _addProffessor.text;
     _addProffessor.clear();

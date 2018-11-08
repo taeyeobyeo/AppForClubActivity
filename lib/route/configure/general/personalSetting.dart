@@ -12,6 +12,12 @@ class PersonalState extends State<PersonalPage> with TickerProviderStateMixin {
   List<Widget> strings = List();
   TextEditingController _classofController = TextEditingController();
 
+  @override
+  void dispose() { 
+    _classofController.dispose();
+    super.dispose();
+  }
+
   Future<Null> _fixClass() async {
     return showDialog<Null>(
       context: context,
