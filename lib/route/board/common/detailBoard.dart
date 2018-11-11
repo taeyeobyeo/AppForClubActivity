@@ -19,6 +19,13 @@ class DetailAnnouncementState extends State<DetailAnnouncementPage>{
   DetailAnnouncementState({Key key, @required this.data})
     : assert(data != null);
   
+  
+  @override
+  void dispose() {
+    _reply.dispose();
+    super.dispose();
+  }
+
   Widget imageController (Article article){
     if(article.image.length == 0) return SizedBox();
     else {
@@ -337,9 +344,4 @@ class DetailAnnouncementState extends State<DetailAnnouncementPage>{
       )
     );
   }
-  @override
-    void dispose() {
-      _reply.dispose();
-      super.dispose();
-    }
 }

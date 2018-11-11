@@ -45,6 +45,7 @@ class RouteState extends State<RouteApp> {
         accentColor: Colors.black,
       ),
       initialRoute: '/login',
+      // onGenerateRoute: '/login',
       routes:{
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
@@ -148,14 +149,15 @@ class LoginState extends State<LoginPage>{
     return new Scaffold(
       body: new Stack(
         children: <Widget>[
-         Hero(
-            tag:'image13',
-            child: Container(
+        Hero(
+           tag:'image13',
+           child:
+          Container(
               decoration: new BoxDecoration(
                 image: new DecorationImage(image: new AssetImage("assets/images/13.jpg"), colorFilter: ColorFilter.mode(Colors.grey, BlendMode.colorBurn), fit: BoxFit.cover,),
               ),
             ),
-          ),
+         ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -183,8 +185,7 @@ class LoginState extends State<LoginPage>{
                       // .then((FirebaseUser user)=>print(user)
                       // )
                       .catchError((e)=>print(e));
-                  }
-                  ,
+                  },
                 ),
               ],
             ),
