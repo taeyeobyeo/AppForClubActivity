@@ -31,6 +31,7 @@ class AnnouncementState extends State<AnnouncementPage>{
               child: Hero(
                 tag: article.id,
                 child: Image(
+                  height: 240.0,
                   image: NetworkImage(article.image[0]),
                   fit: BoxFit.cover,
                 ),
@@ -39,6 +40,7 @@ class AnnouncementState extends State<AnnouncementPage>{
             ),
           );
           break;
+
         case 2: 
         return 
         Container(
@@ -81,6 +83,7 @@ class AnnouncementState extends State<AnnouncementPage>{
             ),
           );
           break;
+
         default:
           return Container(
             margin: EdgeInsets.symmetric(vertical: 10.0),

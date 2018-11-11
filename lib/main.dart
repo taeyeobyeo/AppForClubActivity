@@ -123,7 +123,6 @@ class LoginState extends State<LoginPage>{
         Navigator.pushNamed(context, '/failed');
       }
     }).catchError((e)=>print(e));
-    
   }
 
   Future<FirebaseUser> _signIn()  async {
