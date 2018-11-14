@@ -148,7 +148,6 @@ class LoginState extends State<LoginPage>{
   
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
       body: new Stack(
         children: <Widget>[
