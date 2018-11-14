@@ -174,7 +174,7 @@ class AddAnnouncementState extends State<AddAnnouncementPage>{
                                     Navigator.pop(context);
                                     List<String> data = List();
                                     for(int i =0;i<_images.length;i++){
-                                      StorageUploadTask uploadTask = FirebaseStorage.instance.ref().child('${type}/${now.toString()}/${i}').putFile(_images[i]);
+                                      StorageUploadTask uploadTask = FirebaseStorage.instance.ref().child('$type/${now.toString()}/$i').putFile(_images[i]);
                                       data.add(await (await uploadTask.onComplete).ref.getDownloadURL());
                                     }
                                     switch(_selection){
