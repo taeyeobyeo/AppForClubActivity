@@ -81,6 +81,11 @@ class LoginPage extends StatefulWidget{
 class LoginState extends State<LoginPage>{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  void initState() { 
+    super.initState();
+    _signIn();
+  }
+
   void setCurrentUser(FirebaseUser user, DateTime logintime){
     cu.currentUser.setCurrentUser(
       user.displayName,
@@ -94,11 +99,11 @@ class LoginState extends State<LoginPage>{
   void _updateUserData(FirebaseUser user)async {
     DateTime now = DateTime.now();
     setCurrentUser(user, now);
-    await Firestore.instance.collection('club').document('슬기짜기').collection('users').document(user.uid).get().then((doc){
+    Firestore.instance.collection('club').document('슬기짜기').collection('users').document(user.uid).get().then((doc){
       if(doc.exists){
         Firestore.instance.runTransaction((Transaction transaction)async{
           CollectionReference reference = Firestore.instance.collection('club').document('슬기짜기').collection('users');
-          await reference.document('${user.uid}').updateData({
+          reference.document('${user.uid}').updateData({
             "uid": user.uid,
             "displayName": user.displayName,
             "photoUrl": user.photoUrl,
@@ -111,7 +116,7 @@ class LoginState extends State<LoginPage>{
       else{
         Firestore.instance.runTransaction((Transaction transaction)async{
         CollectionReference reference = Firestore.instance.collection('club').document('슬기짜기').collection('guest');
-          await reference.document('${user.uid}').setData({
+          reference.document('${user.uid}').setData({
             "uid": user.uid,
             "displayName": user.displayName,
             "email": user.email,
@@ -121,8 +126,7 @@ class LoginState extends State<LoginPage>{
         //입장권한이 안됨
         Navigator.pushNamed(context, '/failed');
       }
-    }).catchError((e)=>print(e));
-    
+    }).catchError((e)=>print(e)); 
   }
 
   Future<FirebaseUser> _signIn()  async {
@@ -134,14 +138,13 @@ class LoginState extends State<LoginPage>{
       accessToken: googleSignInAuthentication.accessToken
     );
     // print(user);
-    _updateUserData(user);
+
     // _googleSignIn.signOut();               
     // print("User Name : ${user.displayName}");
     return user;
   
   }
   
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -179,12 +182,9 @@ class LoginState extends State<LoginPage>{
                     ),
                   ),
                   onPressed: ()async{
-                    await _signIn()
-                      // .then((FirebaseUser user)=>print(user)
-                      // )
+                    _signIn().then((user)=>_updateUserData(user))
                       .catchError((e)=>print(e));
-                  }
-                  ,
+                  },
                 ),
               ],
             ),
