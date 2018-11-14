@@ -127,11 +127,7 @@ class LoginState extends State<LoginPage>{
         //입장권한이 안됨
         Navigator.pushNamed(context, '/failed');
       }
-<<<<<<< HEAD
     }).catchError((e)=>print(e)); 
-=======
-    }).catchError((e)=>print(e));
->>>>>>> 76b7f8d860c85b7008067c6ea00393440f7efe13
   }
 
   Future<FirebaseUser> _signIn()  async {
