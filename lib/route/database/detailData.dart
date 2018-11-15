@@ -147,8 +147,10 @@ class DetailDataState extends State<DetailDataPage>{
                   padding: EdgeInsets.all(20.0),
                   children: <Widget>[
                     ListTile(
+                      leading: Text("분류: " + data['head']['type']),
                       trailing: Text("작성자: "+ data['head']["author"]),
                     ),
+                    Divider(color: Colors.black ,),
                     Text(
                       _classofController.text,
                       softWrap: true,

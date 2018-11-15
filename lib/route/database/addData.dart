@@ -13,6 +13,14 @@ class AddDataState extends State<AddDataPage>{
   TextEditingController _titleController = TextEditingController();
   TextEditingController body = TextEditingController();
 
+  final List<String> _type = ['all','회계', '활동내역', '명단', '제출서류', '인수인계'].toList();
+  String _selection2;
+  void select2(String s){
+    setState(() {
+      _selection2 = s;
+    });
+  }
+
   @override
   void dispose() { 
     _titleController.dispose();
@@ -28,6 +36,25 @@ class AddDataState extends State<AddDataPage>{
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
       child: widget,
+    );
+  }
+
+  Container _filter(Function func,String value, List<DropdownMenuItem<String>> dropdownMenuOptions){
+    return Container(
+      // margin: EdgeInsets.symmetric(vertical: 20.0),
+      width: MediaQuery.of(context).size.width/4,
+      // padding: EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
+      // decoration: BoxDecoration(
+      //   color: Colors.white70,
+      //   borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      // ),
+      child:  DropdownButton(
+        value: value,
+        items: dropdownMenuOptions,
+        onChanged: (s){
+          func(s);
+        },
+      ),
     );
   }
 
@@ -76,10 +103,12 @@ class AddDataState extends State<AddDataPage>{
       backgroundColor: Colors.white70,
       child: Icon(Icons.subdirectory_arrow_left, color: Theme.of(context).accentColor,),
       onPressed: ()async{
+        if(_selection2=="all") _selection2 = "";
         await Firestore.instance.collection('club').document('슬기짜기').collection('database').document(title).setData({
           "head":{
             "author": cu.currentUser.getDisplayName(),
             "title": title,
+            "type": _selection2,
           },
           "body": body.text
         });
@@ -90,6 +119,12 @@ class AddDataState extends State<AddDataPage>{
 
   @override
   Widget build(BuildContext context) {
+    final dropdownMenuOptions2 = _type
+      .map((String item) =>
+        new DropdownMenuItem<String>(value: item, child: new Text(item))
+      )
+      .toList();
+
     return Scaffold(
       floatingActionButton: _submit(),
       body: Stack(
@@ -119,6 +154,7 @@ class AddDataState extends State<AddDataPage>{
                 _whiteEdgeBox(
                   ListTile(
                     title: Text(title),
+                    trailing: _filter(select2, _selection2, dropdownMenuOptions2),
                     onTap: (){
                       _fixTitle();
                     },

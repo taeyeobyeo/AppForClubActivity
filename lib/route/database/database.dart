@@ -9,31 +9,41 @@ class DatabasePage extends StatefulWidget{
 }
 
 class DatabaseState extends State<DatabasePage>{
-  final List<String> _years = ['2018-1', '2018-2', '2019-1', '2019-2'].toList();
+  final List<String> _years = ['all','2018-1', '2018-2', '2019-1', '2019-2'].toList();
   String _selection;
   void select1(String s){
     setState(() {
-          _selection = s;
-        });
+      _selection = s;
+    });
   }
   
-  final List<String> _type = ['회계', '활동내역', '명단', '제출서류'].toList();
+  final List<String> _type = ['all','회계', '활동내역', '명단', '제출서류', '인수인계'].toList();
   String _selection2;
   void select2(String s){
     setState(() {
-          _selection2 = s;
-        });
+      _selection2 = s;
+      switch(s){
+        case 'all':
+          queryTerm = Firestore.instance.collection('club').document('슬기짜기').collection('database').snapshots();
+          break;
+        default:
+          queryTerm = Firestore.instance.collection('club').document('슬기짜기').collection('database').where('head.type', isEqualTo: _selection2).snapshots();
+          break;
+      }
+    });
   }
+
+  Stream<QuerySnapshot> queryTerm = Firestore.instance.collection('club').document('슬기짜기').collection('database').snapshots();
 
   Container _filter(Function func,String value, List<DropdownMenuItem<String>> dropdownMenuOptions){
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20.0),
-      width: MediaQuery.of(context).size.width/2 -20,
-      padding: EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
-      decoration: BoxDecoration(
-        color: Colors.white70,
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-      ),
+      // margin: EdgeInsets.symmetric(vertical: 20.0),
+      width: MediaQuery.of(context).size.width/4,
+      // padding: EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
+      // decoration: BoxDecoration(
+      //   color: Colors.white70,
+      //   borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      // ),
       child:  DropdownButton(
         value: value,
         items: dropdownMenuOptions,
@@ -151,22 +161,25 @@ class DatabaseState extends State<DatabasePage>{
                   backgroundColor: Colors.white70,
                   floating: true,
                   snap: true,
+                  actions: <Widget>[
+                    _filter(select2, _selection2, dropdownMenuOptions2)
+                  ],
                 ),
               ];
             },
             body:StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('club').document('슬기짜기').collection('database').snapshots(),
+              stream: queryTerm,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return LinearProgressIndicator();
                 return Column(
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        _filter(select1,_selection, dropdownMenuOptions),
-                        _filter(select2,_selection2, dropdownMenuOptions2),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: <Widget>[
+                    //     _filter(select1,_selection, dropdownMenuOptions),
+                    //     _filter(select2,_selection2, dropdownMenuOptions2),
+                    //   ],
+                    // ),
                     Expanded(
                       child: ListView(
                         children: snapshot.data.documents.map((data)=>_buildListItem(context, data)).toList(),
