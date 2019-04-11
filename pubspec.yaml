@@ -26,8 +26,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+<<<<<<< HEAD
 
 flutter:
+=======
+flutter:
+
+>>>>>>> 19c894026c42ed2c91693f790fbc9fe7cf3a9b92
   uses-material-design: true
   assets:
     - assets/images/1.jpg
